@@ -1,0 +1,32 @@
+<!doctype html>
+{% block header %}
+  <h1>{% block title %}Posts{% endblock %}</h1>
+  <!-- {% if g.user %} -->
+    <a class="action" href="{{ url_for('edit') }}">New</a>
+  <!-- {% endif %} -->
+{% endblock %}
+
+{% block content %}
+  <form method="GET" action="{{url_for('create_page')}}">
+    <input type="submit" value="Create" />
+  </form>
+  <form method="POST">
+    <input type="submit" value="DeleteOne" name="submit"/>
+  </form>
+  {% for post in posts %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ post['title'] }}</h1>
+
+          <div class="about"> on {{ post.get('timestamp').strftime("%Y%m%d-%H%M") if post.get('timestamp') }}</div>
+        </div>
+
+      </header>
+      <p class="body">{{ post['body'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
