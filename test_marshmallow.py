@@ -5,10 +5,15 @@ from flask_marshmallow import Marshmallow
 app = Flask(__name__)
 ma = Marshmallow(app)
 
-from mongoengine import Document as Model
-from flask_marshmallow import Integer, String, DateTime
+from mongoengine import Document
+from marshmallow.fields import Integer, String, DateTime
 
-class User(Model):
+
+
+
+
+
+class User(Document):
     email = StringField()
     password = StringField
     date_created = Column(DateTime, auto_now_add=True)
